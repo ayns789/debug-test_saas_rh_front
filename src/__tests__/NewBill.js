@@ -19,6 +19,19 @@ describe('Given I am connected as an employee', () => {
       const newBillForm = screen.getByTestId('form-new-bill');
       expect(newBillForm).toBeTruthy();
     });
+
+    //////////////////
+    // to override the error "Not implemented: window.alert" ( line 45 NewBill.js)
+    // window.alert = jest.fn();
+
+    // test('login api resolves true', () => {
+    //   window.alert.mockClear();
+    //   /* ... */
+    // });
+    window.alert = jest.fn(() => ({}));
+    //////////////////
+
+    // champs de facture
     test('Then it should render 8 entries', () => {
       const html = NewBillUI();
       document.body.innerHTML = html;
@@ -29,11 +42,11 @@ describe('Given I am connected as an employee', () => {
       const expenseNameInput = screen.getByTestId('expense-name');
       expect(expenseNameInput).toBeTruthy();
 
-      const datePicker = screen.getByTestId('datepicker');
-      expect(datePicker).toBeTruthy();
-
       const amountInput = screen.getByTestId('amount');
       expect(amountInput).toBeTruthy();
+
+      const datePicker = screen.getByTestId('datepicker');
+      expect(datePicker).toBeTruthy();
 
       const vatInput = screen.getByTestId('vat');
       expect(vatInput).toBeTruthy();
@@ -48,6 +61,7 @@ describe('Given I am connected as an employee', () => {
       expect(fileInput).toBeTruthy();
     });
   });
+
   describe('When I add an image file as bill proof', () => {
     test('Then this new file should have been changed in the input', () => {
       Object.defineProperty(window, 'localStorage', {
@@ -86,6 +100,7 @@ describe('Given I am connected as an employee', () => {
       expect(fileInput.files[0].name).toBe('bill.png');
     });
   });
+
   describe('When I add an non-image file as bill proof', () => {
     test('Then throw an alert', () => {
       Object.defineProperty(window, 'localStorage', {
@@ -124,6 +139,7 @@ describe('Given I am connected as an employee', () => {
       expect(handleChangeFile).toHaveBeenCalled();
     });
   });
+
   describe('When I Submit form', () => {
     test('Then, I should be sent on Bills page', () => {
       Object.defineProperty(window, 'localStorage', {
@@ -155,14 +171,14 @@ describe('Given I am connected as an employee', () => {
       fireEvent.submit(newBillForm);
 
       expect(handleSubmit).toHaveBeenCalled();
-      expect(screen.getAllByText('Mes notes de frais')).toBeTruthy();
+      expect(screen.getByTestId('btn-new-bill')).toBeTruthy();
     });
   });
 });
 
 // Test d'intégration POST
-describe('Given I am a user connected as employee', () => {
-  describe('When I send a new Bill', () => {
+describe('Given i am a user connected as employee', () => {
+  describe('When i send a new Bill', () => {
     test('fetches bills from mock API POST', async () => {
       const getSpy = jest.spyOn(mockStore, 'bills');
 

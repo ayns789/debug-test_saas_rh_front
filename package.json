@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage --watchAll"
   },
   "jest": {
     "verbose": false,

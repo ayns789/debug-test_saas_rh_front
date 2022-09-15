@@ -64,7 +64,7 @@ describe('Given I am connected as an employee', () => {
           type: 'Employee',
         })
       );
-      console.log('window.localStorage : ', window.localStorage.getItem('user'));
+      // console.log('window.localStorage : ', window.localStorage.getItem('user'));
 
       // récupération et insertion dans le html des composants BillsUI
       const html = BillsUI({ data: [] });
@@ -91,13 +91,7 @@ describe('Given I am connected as an employee', () => {
       userEvent.click(newBillBtn);
       // console.log('1');
       expect(handleClickNewBill).toHaveBeenCalled();
-      // console.log('2');
-      // expect(screen.getByText(' Envoyer une note de frais ')).toBeTruthy();
-      // expect(screen.getByText(' Envoyer une note de frais ')).toBe(true);
-      // expect(screen.queryByText('Envoyer une note de frais')).toBeTruthy();
       expect(screen.getByTestId('form-new-bill')).toBeTruthy();
-      // const modale = screen.getByTestId('form-new-bill');
-      // expect(modale).toBeTruthy();
     });
   });
 
@@ -154,6 +148,7 @@ describe('Given I am connected as an employee', () => {
 
       expect(modale.classList).toContain('show');
     });
+
     //Test d'intégration POST
     describe('When the app try to fetch datas from the API', () => {
       describe('When it succeed', () => {
@@ -164,6 +159,7 @@ describe('Given I am connected as an employee', () => {
           expect((await bills.list()).length).toBe(4);
         });
       });
+
       describe('When it fails with a 404 error message', () => {
         test('Then it should display a 404 error message', async () => {
           mockStore.bills.mockImplementationOnce(() => {
@@ -175,6 +171,7 @@ describe('Given I am connected as an employee', () => {
           expect(message).toBeTruthy();
         });
       });
+
       describe('When it fails with a 500 error message', () => {
         test('Then it should display a 500 error message', async () => {
           mockStore.bills.mockImplementationOnce(() => {
