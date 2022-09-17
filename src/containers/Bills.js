@@ -33,12 +33,14 @@ export default class {
   };
 
   getBills = () => {
+    const antiChrono = (a, b) => (a < b ? 1 : +1);
+    // const antiChrono1 = (a, b) => b - a;
     if (this.store) {
       return this.store
         .bills()
         .list()
         .then((snapshot) => {
-          const bills = snapshot.map((doc) => {
+          const bills = snapshot.sort(antiChrono).map((doc) => {
             try {
               return {
                 ...doc,
@@ -56,7 +58,7 @@ export default class {
               };
             }
           });
-          // console.log('length', bills.length)
+          console.log('length', bills.length);
           return bills;
         });
     }

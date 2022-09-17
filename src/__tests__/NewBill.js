@@ -12,7 +12,7 @@ import { ROUTES } from '../constants/routes';
 
 describe('Given I am connected as an employee', () => {
   describe('When I am on NewBill Page', () => {
-    test('Then ...', () => {
+    test('Then check if form "new bill" is loading', () => {
       const html = NewBillUI();
       document.body.innerHTML = html;
       //to-do write assertion
@@ -28,6 +28,7 @@ describe('Given I am connected as an employee', () => {
     //   window.alert.mockClear();
     //   /* ... */
     // });
+
     window.alert = jest.fn(() => ({}));
     //////////////////
 
